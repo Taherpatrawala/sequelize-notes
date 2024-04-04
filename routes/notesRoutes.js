@@ -8,6 +8,10 @@ notesRoutes
   .get(authorize, notesControllers.getAllNotes)
   .post(authorize, notesControllers.addNote);
 
-notesRoutes.route("/:id").get(authorize, notesControllers.getNoteById);
+notesRoutes
+  .route("/:id")
+  .get(authorize, notesControllers.getNoteById)
+  .put(authorize, notesControllers.updateNoteById)
+  .delete(authorize, notesControllers.deleteNoteById);
 
 module.exports = notesRoutes;

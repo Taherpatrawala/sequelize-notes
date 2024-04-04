@@ -45,9 +45,30 @@ notesControllers.getNoteById = async (req, res) => {
   }
 };
 
-notesControllers.deleteNote = async (req, res) => {
-  const userId = req.user.id;
-  const { noteId } = req.body;
+notesControllers.updateNoteById = async (req, res) => {
+  const noteId = req.params.id;
+  const data = req.body;
+
+  try {
+    const note = await Notes.findByPk(noteId);
+    const updateNote = await note.update(data);
+    res.status(202).json(updateNote);
+  } catch (error) {
+    console.log("Error in updating notes", error);
+    res.status(501).json({ message: "Error in updating notes" });
+  }
+};
+
+notesControllers.deleteNoteById = async (req, res) => {
+  const noteId = req.params.id;
+  try {
+    await Notes.destroy({ where: { id: noteId } });
+    return res.status(204).json({ message: "Note deleted succesfully!" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error in deleting Note with provided id!" });
+  }
 };
 
 module.exports = notesControllers;
