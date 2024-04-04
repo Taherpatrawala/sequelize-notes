@@ -15,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+  //User.associate = (models) => {
+  //  User.hasMany(sequelize.define("Notes"), {
+  //    foreignKey: {
+  //      allowNull: false,
+  //    },
+  //    onDelete: "SET NULL",
+  //    onUpdate: "CASCADE",
+  //  });
+  //};
 
   return User;
 };

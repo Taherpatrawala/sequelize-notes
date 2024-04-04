@@ -5,6 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const authRoutes = require("./routes/authRoutes");
+const notesRoutes = require("./routes/notesRoutes");
 
 app.use(cors());
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
+app.use("/notes", notesRoutes);
 
 db.sequelize
   .sync()
