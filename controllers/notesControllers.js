@@ -18,8 +18,16 @@ notesControllers.addNote = async (req, res) => {
 
 notesControllers.getAllNotes = async (req, res) => {
   const userId = req.user.id;
+  const pageNumber = req.query.page || 1;
+  const limit = 10;
+  const offset = (pageNumber - 1) * limit;
   try {
-    const notes = await Notes.findAll({ where: { UserId: userId } });
+    const notes = await Notes.findAll({
+      where: { UserId: userId },
+      limit: limit,
+      offset: offset,
+      order: [["createdAt", "DESC"]],
+    });
     if (!notes) {
       return res
         .status(204)
@@ -28,7 +36,7 @@ notesControllers.getAllNotes = async (req, res) => {
     res.status(200).json(notes);
   } catch (errors) {
     console.log("Get notes error", errors);
-    res.status(500).json("Internal server error");
+    res.status(500).json("Provided notes list was not found.");
   }
 };
 
