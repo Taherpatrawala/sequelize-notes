@@ -34,10 +34,17 @@ notesControllers.getAllNotes = async (req, res) => {
 
 notesControllers.getNoteById = async (req, res) => {
   const noteId = req.params.id;
+  const userId = req.user.id;
   try {
-    const note = await Notes.findByPk(noteId, {
-      include: [{ model: User, attributes: ["id", "email"] }],
-    });
+    const note = await Notes.findOne(
+      { where: { id: noteId, UserId: userId } },
+      {
+        include: [{ model: User, attributes: ["id", "email"] }],
+      }
+    );
+    if (!note) {
+      return res.status(400).json({ message: "No Notes with given id found" });
+    }
     res.status(202).json(note);
   } catch (errors) {
     console.log("Get notes by id error", errors);
@@ -46,11 +53,12 @@ notesControllers.getNoteById = async (req, res) => {
 };
 
 notesControllers.updateNoteById = async (req, res) => {
+  const userId = req.user.id;
   const noteId = req.params.id;
   const data = req.body;
 
   try {
-    const note = await Notes.findByPk(noteId);
+    const note = await Notes.findOne({ where: { id: noteId, UserId: userId } });
     const updateNote = await note.update(data);
     res.status(202).json(updateNote);
   } catch (error) {
@@ -61,8 +69,9 @@ notesControllers.updateNoteById = async (req, res) => {
 
 notesControllers.deleteNoteById = async (req, res) => {
   const noteId = req.params.id;
+  const userId = req.user.id;
   try {
-    await Notes.destroy({ where: { id: noteId } });
+    await Notes.destroy({ where: { id: noteId, UserId: userId } });
     return res.status(204).json({ message: "Note deleted succesfully!" });
   } catch (error) {
     return res
