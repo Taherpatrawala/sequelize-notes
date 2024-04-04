@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "taher1234",
+    "database": "task1",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "taher1234",
+    "database": "task1",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "taher1234",
+    "database": "task1",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
