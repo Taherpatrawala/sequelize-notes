@@ -5,7 +5,7 @@ const authControllers = require("../controllers/authControllers");
 const authRoute = express.Router();
 
 authRoute.post(
-  "/signup",
+  "/register",
   body("email")
     .notEmpty()
     .withMessage("Email is required")

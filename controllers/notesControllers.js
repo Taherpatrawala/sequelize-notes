@@ -80,7 +80,7 @@ notesControllers.deleteNoteById = async (req, res) => {
   const userId = req.user.id;
   try {
     await Notes.destroy({ where: { id: noteId, UserId: userId } });
-    return res.status(204).json({ message: "Note deleted succesfully!" });
+    return res.status(200).json({ message: "Note deleted succesfully!" });
   } catch (error) {
     return res
       .status(500)

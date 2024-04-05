@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const db = require("./models");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
+const db = require("./models");
 const authRoutes = require("./routes/authRoutes");
 const notesRoutes = require("./routes/notesRoutes");
 
