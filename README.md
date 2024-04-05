@@ -53,7 +53,7 @@ Make sure to include the appropriate header:- `Authorization: Bearer <token>`, w
 
 To check pagination on `/notes` route, add a page number query in the URL eg: `http://localhost:3000/notes?page=2` .
 
-Note: Just for convenience, I have purposely kept the `.env` file in this repository.
+## Note: Just for convenience, I have purposely kept the `.env` file in this repository.
 
 ## Technologies Used
 
