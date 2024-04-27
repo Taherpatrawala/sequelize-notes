@@ -5,7 +5,7 @@ const { User } = require("../models");
 const { validationResult } = require("express-validator");
 
 const authControllers = {};
-
+//this is a test comment
 authControllers.signup = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
